@@ -1,0 +1,31 @@
+The contents of this repository are a combination of many tools such as the Udemy Course named ML A-Z, Deep Learning Specialization by Andrew NG and some useful interview prep books
+such as 1. Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 2. Cracking the Machine Learning interview and other resources will be added as the repo grows.
+
+The intention behind creating this repo is for it to be a roadmap for anyone who wants to fall deeper into this never ending pit of AI and what many(including me) believe to be the 
+future of Computer Science with the advent of growing data.
+
+This repository is a compilation of fundamental Machine Learning techniques which will be updated on a regular basis
+
+1. Data preprocessing
+2. Linear regression
+3. Polynomial regression
+4. Support Vector
+5. Decision tree
+6. Random forest
+7. Logistic regression
+8. KNN
+9. SVM
+10. Kernel SVM
+11. Naive Bayes
+12. Deision Tree Classification
+13. Random forest
+14. K-means clustering
+17. Hierarchical clustering
+
+The other folders in this repository are named after the major types of machine learning techniques and contatin an implementatio nad understanding of the same.
+
+1. Refinforcement learning(RL): UCB & Thompson Sampling
+2. Natural Language Processing(NLP)
+3. Deep Learning: Neural Nets, CNN
+4. Dimensionality reduction: PCA,LDA,Kernel LDA
+5. Boosting: Adaboost, XG Boost
