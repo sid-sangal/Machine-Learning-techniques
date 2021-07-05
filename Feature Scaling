@@ -1,0 +1,37 @@
+Feature Scaling: Standardization and Normalization
+
+Why:
+
+Each column/ feature has it's own scale. Hieght in feet and inches, distance in kms/miles, count in integer values and meausterments in decimal values.
+In order to have an ease of calculation and a continuity in the dataset, we scale up or down all the features into the same range. This helps in the computation part and visualization aspect as well.
+
+
+Normalization:
+
+A very common technique for normalizaation or scaling into (0,1) is called min-max scalar
+
+The formula utilizes the max and min values in the entire column.
+
+x_norm = (x-x_min)/(x_max - x_min)
+
+Standardization:
+
+x_norm = x-x_mean/ standard_deviation
+
+This will transform our data with the mean 0 and std_dev 1.
+
+When to use:
+
+When we are utilizing Uclidean distance: K-NN, K-means, LinReg, DNN, ANN etc we need to do scaling. 
+We dont need it for cases like decision trees and random forest, XGBoost. THere is no use beacause we are creating classes. It wont effect the output as it is a boundary generation technique 
+and not a minimization/ model prediction technique.
+
+When to use what:
+
+For most DNN like CNN: we use normalization (min_max_scalar). For pixel inputs in CNN, norm works great.
+
+
+Good resources: 
+https://www.youtube.com/watch?v=mnKm3YP56PY
+
+https://towardsdatascience.com/all-about-feature-scaling-bcc0ad75cb35
