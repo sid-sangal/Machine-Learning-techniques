@@ -1,0 +1,22 @@
+The intuition behind using polynomial regression is to make use of a line that is not straights and hence uses terms that have a power more than one to incorporate the curve in the graph
+
+The new line that is not straight now reduces the error in prediction or is closer to all datapoints than the linear regression line and hence is a better fit.
+
+
+The ilibrary that will be used is still sklearn. The main part is as following:
+
+from sklearn.preprocessing import PolynomialFeatures
+poly_reg = PolynomialFeatures(degree = 4)
+X_poly = poly_reg.fit_transform(X)
+lin_reg_2 = LinearRegression()
+lin_reg_2.fit(X_poly, y)
+
+Why did we take the entire dataset?
+Ans: Because we have very few samples.
+
+Why did we exclude the first column?
+Ans: Beause it is irrelevant to the output since each input is a unique position already represnted by the index level and has no connection to the output salary.
+
+All other steps are the smae as before. The only difference has been listed above.
+
+This graph can be visualized as it has one dependent variable and one independent variable.
