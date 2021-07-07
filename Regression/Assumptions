@@ -1,0 +1,11 @@
+The assumptions are as following:
+
+1. Linearity: The relationship between X and the mean of Y is linear.
+
+2. Homoscedasticity: The variance of residual is the same for any value of X.
+
+3. Multivariate normality: For any fixed value of X, Y is normally distributed.
+
+4. Independence of errors: Observations are independent of each other.
+
+5. Lack of multicollinearity
