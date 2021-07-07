@@ -1,0 +1,7 @@
+For a universe with null hypothesis, we perform an experiment with the assumption that the experiment is fair and calculate the probability of the the current event.
+
+If the probability of the event (coin flip with continuous smae output) drops significantly:
+
+We say that the p-value is so small that it is justified that the universe is not fair.
+
+We have to put it in mathematical terms where we set a threshold value on the probability of the event and we reject the hypothesis and declare that the universe is not fair.
