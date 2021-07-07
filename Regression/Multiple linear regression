@@ -11,3 +11,39 @@ We will create a dummy variable based on the number of categories. For the curre
 for 3 numeric features and 1 ategorical data:
 y = b0 + b1*x1 + b2*x2 + b3*x3 + b4*D1
 
+Building a model, step-by-step:
+
+WHy do we need to select some parameters and reject some?
+Ans: If you thrwo a lot of stuff into your model, the explainability reduces significantly like in ANN. We will hence keep the ones that actually have a significant impact on the output
+
+Methods of building models:
+1. All-in: When we have proior knowledge, when we have no other choice or are constraint bound for critical applications or preparing for backward elimination.
+
+2. Backward Elimination: Select a significane level. Fit full model with all predictors. Consider predictor with highest p-value. Remove that predictor. Fit model without that variable.
+
+3. Forward Elimination: Select significance level. Fit all regression model nad select one with lowest p-value. Keep that variable nad add all remaining nad then keep the two variable regressor with lowest p-va;ue and repeat. Stop when p>significant value for all remaining variables. Keep previous model..
+
+4. Bidirectional Elimination: Combine the above two models. Start with forward elimination and grow model. Then do backward and reduce variable if needed. Stop when no variables are removed or added.
+
+5. Score Comparison: All possible models. Most resource consuming. COnstruct all possible models with all numbers of variables (1023 for 10 variables). Select one with best criterion.
+
+*Backward elimination is the fastst. Score comparison is the slowest and most computationally expensive.
+
+Code implementation:
+
+Exactly the smae as simple linear regression except for one hot encoding for the categorical data.
+1. Import libraries
+2. Import dataset
+3. Split into train and tesst
+
+*OneHotEncoding for categorical data:
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
+ct = ColumnTransformer(transformers=[('encoder', OneHotEncoder(), [3])], remainder='passthrough')
+X = np.array(ct.fit_transform(X))
+
+The inbuilt class (from sklearn.linear_model import LinearRegression) already takes care of "dummy variable trap" and variable significance for "backward elimination"
+
+*the output:
+
+There are 4 input features and hence it is a 4 dimensional matrix. We cannot visualize this using a graph and hence we just print the output.
