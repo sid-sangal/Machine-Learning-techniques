@@ -1,0 +1,130 @@
+This file goes into details of the theory behind nad the coding implementation behind Regression tchniques.
+
+In the past I have done these basic implementations multiple times and the goal has always been to compare the result of the model made without sklearn to the result of the one with sklearn.
+
+The implenetation can be represented in a few fundamental steps as follow:
+* The steps till 3 are the same from data preprocessing and will be used for all models.
+
+1. Import libraries:
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+2. Import dataset and define your dependent and independent variables:
+dataset = pd.read_csv('Salary_Data.csv')
+X = dataset.iloc[:, :-1].values
+y = dataset.iloc[:, -1].values
+
+3. Splitting the dataset into train and test:
+*here the dataset is of size 30 points and the split is 2/3:1/3
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 1/3, random_state = 0)
+
+4. Use the sklearn inbuild module. Create an instance and train the model:
+*The .fit method is the training aspect where we 'fit' the data onto the equations of loss and cost function.
+
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(X_train, y_train)
+
+5. Use the inbuilt .predict function on the test data:
+y_pred = regressor.predict(X_test)
+
+6. Display the training set(x_train,y_train) and the predicted straight line regressor.predict(X_train) that takes X_train as the input:
+*The matplotlib.pyplot and sklearn are called in this step.
+
+plt.scatter(X_train, y_train, color = 'red')
+plt.plot(X_train, regressor.predict(X_train), color = 'blue')
+plt.title('Salary vs Experience (Training set)')
+plt.xlabel('Years of Experience')
+plt.ylabel('Salary')
+plt.show()
+
+7. Display the test dataset (X_test,Y_test) and the same line as before:
+plt.scatter(X_test, y_test, color = 'red')
+plt.plot(X_train, regressor.predict(X_train), color = 'blue')
+plt.title('Salary vs Experience (Test set)')
+plt.xlabel('Years of Experience')
+plt.ylabel('Salary')
+plt.show()
+
+Implementation of Linear Regression 'without' sklearn library:
+
+import numpy as np
+
+
+def r2_score(y_true, y_pred):
+    corr_matrix = np.corrcoef(y_true, y_pred)
+    corr = corr_matrix[0, 1]
+    return corr ** 2
+
+
+class LinearRegression:
+    def __init__(self, learning_rate=0.001, n_iters=1000):
+        self.lr = learning_rate
+        self.n_iters = n_iters
+        self.weights = None
+        self.bias = None
+
+    def fit(self, X, y):
+        n_samples, n_features = X.shape
+
+        # init parameters
+        self.weights = np.zeros(n_features)
+        self.bias = 0
+
+        # gradient descent
+        for _ in range(self.n_iters):
+            y_predicted = np.dot(X, self.weights) + self.bias
+            # compute gradients
+            dw = (1 / n_samples) * np.dot(X.T, (y_predicted - y))
+            db = (1 / n_samples) * np.sum(y_predicted - y)
+
+            # update parameters
+            self.weights -= self.lr * dw
+            self.bias -= self.lr * db
+
+    def predict(self, X):
+        y_approximated = np.dot(X, self.weights) + self.bias
+        return y_approximated
+
+
+# Testing
+if __name__ == "__main__":
+    # Imports
+    import matplotlib.pyplot as plt
+    from sklearn.model_selection import train_test_split
+    from sklearn import datasets
+
+    def mean_squared_error(y_true, y_pred):
+        return np.mean((y_true - y_pred) ** 2)
+
+    X, y = datasets.make_regression(
+        n_samples=100, n_features=1, noise=20, random_state=4
+    )
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=1234
+    )
+
+    regressor = LinearRegression(learning_rate=0.01, n_iters=1000)
+    regressor.fit(X_train, y_train)
+    predictions = regressor.predict(X_test)
+
+    mse = mean_squared_error(y_test, predictions)
+    print("MSE:", mse)
+
+    accu = r2_score(y_test, predictions)
+    print("Accuracy:", accu)
+
+    y_pred_line = regressor.predict(X)
+    cmap = plt.get_cmap("viridis")
+    fig = plt.figure(figsize=(8, 6))
+    m1 = plt.scatter(X_train, y_train, color=cmap(0.9), s=10)
+    m2 = plt.scatter(X_test, y_test, color=cmap(0.5), s=10)
+    plt.plot(X, y_pred_line, color="black", linewidth=2, label="Prediction")
+    plt.show()
+Why do we use the X_train for the lin ein the test set visualization?
+Ans: Because we want to observe how well the trained model on the training data performs on the never seen before test data. Fitting model on the test data is pointless because then there is no [rediction as the data is now known.
+----------------Done------------------------
